@@ -248,6 +248,15 @@ footer {
   font-weight: 600;
 }
 
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 500px) {
   body {
     margin: 20px;
