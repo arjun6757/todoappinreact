@@ -256,7 +256,18 @@ footer a:hover {
   text-decoration: underline;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
+  .todoList {
+    margin: 0px;
+    width: 80vw;
+  }
+
+  .items {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
   body {
     margin: 20px;
   }
@@ -277,6 +288,13 @@ footer a:hover {
   .mui-done-button:hover,
   .mui-done-icon:hover {
     background-color: inherit;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .items .cry-txt-emj {
+    border: 1px solid #fff;
+    font-size: 2rem;
   }
 }
 

@@ -49,7 +49,7 @@ function Items(props) {
       <Filter array={items} getOption={handleOption} />
 
       {optionBasedItems.length === 0 ? (
-        <span>(┬┬﹏┬┬)</span>
+        <span className="cry-txt-emj">(┬┬﹏┬┬)</span>
       ) : (
         <ul>
           {optionBasedItems.map((item) => {
