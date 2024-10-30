@@ -2,6 +2,7 @@ import React from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
+import EditIcon from "@mui/icons-material/Edit";
 
 function Item(props) {
   return (
@@ -10,19 +11,15 @@ function Item(props) {
 
       <div className="button-div">
         <IconButton
-          title="Delete"
-          onClick={props.delete}
-          className="delete-btn"
-          aria-label="delete"
+          className="mui-done-button"
+          onClick={props.done}
+          title="Done"
+          color="primary"
+          aria-label="done"
           fontSize="small"
-          // sx={{
-          //   "&:hover": {
-          //     backgroundColor: "blueviolet",
-          //     color: "#fff",
-          //   },
-          // }}
         >
-          <DeleteIcon
+          <CheckIcon
+            className="mui-done-icon"
             sx={{
               color: "#eee",
             }}
@@ -31,21 +28,28 @@ function Item(props) {
         </IconButton>
 
         <IconButton
-          className="mui-done-button"
-          onClick={props.done}
-          title="Done"
-          color="primary"
-          aria-label="done"
-          // sx={{
-          //   "&:hover": {
-          //     backgroundColor: "blueviolet",
-          //     color: "#fff",
-          //   },
-          // }}
+          title="Edit"
+          onClick={props.edit}
+          className="edit-btn"
+          aria-label="edit"
           fontSize="small"
         >
-          <CheckIcon
-            className="mui-done-icon"
+          <EditIcon
+            sx={{
+              color: "#eee",
+            }}
+            fontSize="small"
+          />
+        </IconButton>
+
+        <IconButton
+          title="Delete"
+          onClick={props.delete}
+          className="delete-btn"
+          aria-label="delete"
+          fontSize="small"
+        >
+          <DeleteIcon
             sx={{
               color: "#eee",
             }}

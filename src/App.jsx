@@ -12,7 +12,13 @@ function App() {
   const [readyCIBtn, setReadyCIBtn] = useState(false);
   const [input, setInput] = useState("");
   // const [items, setItems] = useState([]); used previously
-  const [items, setItems] = useLocalStorage('tasks', []);
+  const [items, setItems] = useLocalStorage("tasks", []);
+
+  const [editClicked, setEditClicked] = useState(false);
+  const [textareaValue, setTextAreaValue] = useState({
+    content: "",
+    id: "",
+  });
 
   function clearInput(event) {
     event.preventDefault();
@@ -30,7 +36,7 @@ function App() {
         completed: false,
       };
       const updatedArray = [...prev, itemValue];
-      console.log("adding item with following properties: ", updatedArray);
+      // console.log("adding item with following properties: ", updatedArray);
       return updatedArray;
     });
     setInput("");
@@ -56,8 +62,32 @@ function App() {
     });
   }
 
+  function handleEdit(data) {
+    // console.log("data on handleEdit app.jsx", data);
+    setEditClicked(true);
+    // console.log(data.content.id);
+    setTextAreaValue({
+      content: data.content.content,
+      id: data.id,
+    });
+  }
+
+  function handleSave(id) {
+    setItems((prev) => {
+      return prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              content: textareaValue.content,
+            }
+          : item
+      );
+    });
+    setEditClicked(false);
+  }
+
   return (
-    <div>
+    <div className="container">
       <div className="todoList">
         <Heading />
 
@@ -95,9 +125,45 @@ function App() {
         </div>
       </div>
 
-      <Items arr={items} done={doneWithId} delete={deleteWithId} />
+      <Items
+        arr={items}
+        done={doneWithId}
+        delete={deleteWithId}
+        edit={handleEdit}
+      />
 
       <Footer />
+      {editClicked ? (
+        <div className="edit-form">
+          <textarea
+            autoFocus
+            name="textarea"
+            value={textareaValue.content}
+            onChange={(e) => {
+              setTextAreaValue((prev) => ({
+                ...prev,
+                content: e.target.value,
+              }));
+            }}
+          />
+          <div className="edit-button-div">
+            <button
+              onClick={() => setEditClicked(false)}
+              className="cancel-btn"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                handleSave(textareaValue.id);
+              }}
+              className="save-btn"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

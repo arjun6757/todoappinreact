@@ -24,6 +24,13 @@ function Items(props) {
     props.done(id);
   }
 
+  function handleEdit(id) {
+    let data = items.find(i=> i.id === id);
+    let obj = {content: data, id: id};
+    // console.log('im in handleEdit printing data requested', obj);
+    props.edit(obj);
+  }
+
   function handleOption(option) {
     setSavedOption(option);
     if (option === "pending") {
@@ -52,9 +59,8 @@ function Items(props) {
                 key={item.id}
                 content={item.content}
                 done={() => handleDone(item.id)}
-                delete={() => {
-                  handleDelete(item.id);
-                }}
+                delete={() => handleDelete(item.id)}
+                edit={() => handleEdit(item.id)}
                 index={item.id}
               />
             );

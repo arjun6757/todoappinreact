@@ -12,11 +12,16 @@
 }
 
 body {
+  background-color: #212121;
+  margin: 30px 20px;
+}
+
+.container {
+  /* border: 1px solid #fff; */
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
-  background-color: #212121;
 }
 
 footer {
@@ -35,8 +40,6 @@ footer {
 }
 
 .todoList {
-  /* background-color: #212121; */
-  margin-top: 30px;
   width: 50vw;
   padding: 20px;
   background-color: #333;
@@ -188,10 +191,6 @@ footer {
   text-wrap: pretty;
 }
 
-/* .items ul .list-item-div  li .delete-btn {
-  margin-left: 7px;
-} */
-
 .items span {
   width: 100%;
   display: flex;
@@ -210,7 +209,7 @@ footer {
 
 .list-item-div .button-div {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   gap: 8px;
   background-color: #212121;
   border-radius: 25px;
@@ -281,7 +280,8 @@ footer a:hover {
   }
 }
 
-@-moz-document url-prefix() { /* for mozilla specific code */
+@-moz-document url-prefix() {
+  /* for mozilla specific code */
   .todoList .add-btn,
   .emoji-on-add {
     width: 40px;
@@ -289,5 +289,72 @@ footer a:hover {
 
   .clearInput {
     top: 4px;
+  }
+}
+
+.edit-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #222221;
+  width: 600px;
+  min-height: 200px;
+  height: auto;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-form textarea {
+  width: 100%;
+  min-height: 200px;
+  height: auto;
+  border: none;
+  outline: none;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  /* border-radius: 5px; */
+  font-size: 0.9rem;
+  resize: none;
+  border-radius: 7px;
+}
+
+.edit-form .edit-button-div {
+  display: flex;
+  justify-content: space-between;
+}
+.edit-form button {
+  padding: 5px 12px;
+  border: none;
+  background-color: var(--juicy-color);
+  border-radius: 7px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.edit-form button:hover {
+  color: #ccc;
+}
+
+.edit-form button:active {
+  scale: 0.9;
+}
+
+@media screen and (max-width: 600px) {
+  .edit-form {
+    width: 90vw;
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .edit-form textarea {
+    min-height: 200px;
   }
 }
