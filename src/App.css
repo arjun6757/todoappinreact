@@ -293,7 +293,6 @@ footer a:hover {
 
 @media screen and (max-width: 360px) {
   .items .cry-txt-emj {
-    border: 1px solid #fff;
     font-size: 2rem;
   }
 }
