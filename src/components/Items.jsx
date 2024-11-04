@@ -25,14 +25,15 @@ function Items(props) {
   }
 
   function handleEdit(id) {
-    let data = items.find(i=> i.id === id);
-    let obj = {content: data, id: id};
+    let data = items.find((i) => i.id === id);
+    let obj = { content: data, id: id };
     // console.log('im in handleEdit printing data requested', obj);
     props.edit(obj);
   }
 
   function handleOption(option) {
     setSavedOption(option);
+
     if (option === "pending") {
       const newArray = items.filter((item) => item.completed === false);
       setOptionBasedItems(newArray);
@@ -41,6 +42,11 @@ function Items(props) {
       setOptionBasedItems(newArray);
     } else if (option === "all") {
       setOptionBasedItems(items);
+    } else if (option === "importance") {
+      const sortedItems = [...items].sort(
+        (a, b) => b.importance - a.importance
+      );
+      setOptionBasedItems(sortedItems);
     }
   }
 
@@ -58,10 +64,14 @@ function Items(props) {
                 completed={item.completed}
                 key={item.id}
                 content={item.content}
+                importance={item.importance}
                 done={() => handleDone(item.id)}
                 delete={() => handleDelete(item.id)}
                 edit={() => handleEdit(item.id)}
                 index={item.id}
+                changeImportance={(value) =>
+                  props.handleImportance(item.id, value)
+                }
               />
             );
           })}

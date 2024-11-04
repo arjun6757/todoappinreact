@@ -14,6 +14,7 @@ function Filter(props) {
         <option value="all">All</option>
         <option value="pending">Pending</option>
         <option value="completed">Completed</option>
+        <option value="importance">Importance</option>
       </select>
     // )
   );
