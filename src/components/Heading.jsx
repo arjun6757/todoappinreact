@@ -3,13 +3,13 @@ import React from "react";
 function Heading() {
   function dynamicGreeting(time) {
     const greetTime =
-      time >= 0 && time < 12
+      time >= 6 && time < 12
         ? "Morning"
-        : time >= 12 && time < 17
+        : time >= 12 && time < 18
         ? "Afternoon"
-        : time >= 17 && time < 19
+        : time >= 18 && time < 21
         ? "Evening"
-        : time >= 19
+        : time >= 21 || time < 6
         ? "Night"
         : null;
     return greetTime;
