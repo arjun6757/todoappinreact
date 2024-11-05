@@ -144,9 +144,7 @@ function App() {
     setItems((prev) => {
       return prev.map((item) => {
         const obj = { ...item, importance: parseInt(value) };
-        const itemUpdated = item.id === id ? obj : item;
-        console.log('changed details: ', value);
-        return itemUpdated;
+        return item.id === id ? obj : item;
       });
     });
   }

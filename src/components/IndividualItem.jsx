@@ -63,7 +63,6 @@ function Item(props) {
         </div>
 
         <div className="div-importance" title="importance of tasks">
-          imp :
           <input
             type="text"
             value={ival}

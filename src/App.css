@@ -289,13 +289,15 @@ footer {
 
 .div-importance .props-importance {
   display: inline-block;
-  padding-left: 5px;
-  width: 30px;
+  padding: 0px 10px;
+  max-width: 30px;
   height: 100%;
   border: none;
   outline: none;
   background-color: transparent;
   color: inherit;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 .completed {
@@ -344,15 +346,6 @@ footer a:hover {
   .mui-done-button:hover,
   .mui-done-icon:hover {
     background-color: inherit;
-  }
-
-  .div-importance {
-    font-size: 0.9rem;
-  }
-
-  .div-importance .props-importance {
-    width: 14px;
-    font-size: 0.9rem;
   }
 }
 
