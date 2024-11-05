@@ -15,7 +15,8 @@ function Heading() {
     return greetTime;
   }
   const now = new Date().getHours();
-  return <h2>Good {dynamicGreeting(now)}, what are your plans today?</h2>; // just calling the function not returning anything
+  const greet = dynamicGreeting(now);
+  return <h2>Good {greet}, { greet != 'Night' ? ('what are your plans today?') : ('what are your plans tomorrow?') }</h2>; // just calling the function not returning anything
 }
 
 export default Heading;
