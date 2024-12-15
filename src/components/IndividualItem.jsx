@@ -5,15 +5,29 @@ import CheckIcon from "@mui/icons-material/Check";
 import EditIcon from "@mui/icons-material/Edit";
 
 function Item(props) {
-
   const [ival, setIval] = useState(props.importance); //default value is gonna be it's importance
 
   return (
     <div id={props.index} className="list-item-div">
-      <li className={props.completed ? "completed" : null}>{props.content}</li>
+      <li
+        className={`${
+          props.completed ? "completed" : ""
+        } leading-7 p-4 pl-2 text-md break-words border-b border-gray-600 flex gap-4 items-center`}
+      >
+        <button
+          title="Delete"
+          onClick={props.delete}
+          aria-label="delete"
+          className="rounded-full p-3 border border-white"
+        >
+          {" "}
+        </button>
+
+        {props.content}
+      </li>
 
       <div className="container-item-prop">
-        <div className="button-div">
+        {/* <div className="button-div">
           <IconButton
             className="mui-done-button"
             onClick={props.done}
@@ -45,24 +59,9 @@ function Item(props) {
               fontSize="small"
             />
           </IconButton>
+        </div> */}
 
-          <IconButton
-            title="Delete"
-            onClick={props.delete}
-            className="delete-btn"
-            aria-label="delete"
-            fontSize="small"
-          >
-            <DeleteIcon
-              sx={{
-                color: "#eee",
-              }}
-              fontSize="small"
-            />
-          </IconButton>
-        </div>
-
-        <div className="div-importance" title="importance of tasks">
+        {/* <div className="div-importance" title="importance of tasks">
           <input
             type="text"
             value={ival}
@@ -70,7 +69,7 @@ function Item(props) {
             onChange={(e) => setIval(e.target.value)}
             onBlur={() => props.changeImportance(ival)} //when the element loses it's focus
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

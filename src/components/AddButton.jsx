@@ -2,7 +2,7 @@ import React from "react";
 
 function AddButton(props) {
   return (
-    <button title="Add item"  onClick={props.add} className="add-btn">
+    <button title="Add item"  onClick={props.add} className="absolute top-0 right-0 h-full w-fit bg-gray-500 rounded-md p-3 text-white ">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

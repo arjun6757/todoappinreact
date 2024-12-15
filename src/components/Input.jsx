@@ -9,6 +9,8 @@ function Input(props) {
 
   return (
     <input
+    style={{fontFamily:"'Noto Sans', sans-serif"}}
+    className="w-full p-5 h-full bg-transparent pb-2 pt-2 outline-none text-white"
       onChange={(event) => {
         handleChange(event);
       }}

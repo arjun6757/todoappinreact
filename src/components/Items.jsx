@@ -51,13 +51,13 @@ function Items(props) {
   }
 
   return (
-    <div className="items">
+    <div className="items p-12 pt-16 relative w-[50vw] rounded-lg text-white my-8 bg-gray-900">
       <Filter array={items} getOption={handleOption} />
 
       {optionBasedItems.length === 0 ? (
-        <span className="cry-txt-emj">(┬┬﹏┬┬)</span>
+        <span className="cry-txt-emj w-full flex flex-col items-center text-5xl text-white">(┬┬﹏┬┬)</span>
       ) : (
-        <ul>
+        <ul className="flex flex-col">
           {optionBasedItems.map((item) => {
             return (
               <Item

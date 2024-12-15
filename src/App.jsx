@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Heading from "./components/Heading";
-import Footer from "./components/Footer";
 import Input from "./components/Input";
 import ClearButton from "./components/ClearInput";
 import AddButton from "./components/AddButton";
@@ -8,11 +7,11 @@ import Items from "./components/Items";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "../LocalStorage";
 import LoadingSpinner from "./components/Loading";
+import "./index.css";
 
 function App() {
   const [readyCIBtn, setReadyCIBtn] = useState(false);
   const [input, setInput] = useState("");
-  // const [items, setItems] = useState([]); used previously
   const [items, setItems] = useLocalStorage("tasks", []);
   const [loading, setLoading] = useState(false);
 
@@ -30,29 +29,12 @@ function App() {
 
   function onAdd(event) {
     event.preventDefault();
-    // setLoading(true);
 
     setItems((prev) => {
       const itemValue = {
-        content: input
-          .split(" ")
-          .some((word) =>
-            [
-              "!important",
-              "!regular",
-              "!slightly",
-              "!largely",
-              "!fairly",
-            ].includes(word)
-          )
-          ? input.replace(
-              /\s(!important|!regular|!slightly|!largely|!fairly)/g,
-              "" //g will consider all not just one /\s will take up any whitespace, | => logical OR in regular expression
-            )
-          : input,
+        content: input,
         id: uuidv4(),
         completed: false,
-        importance: checkImp() || 1, //regular
       };
       const updatedArray = [...prev, itemValue];
       console.log("adding item with following properties: ", updatedArray);
@@ -66,22 +48,23 @@ function App() {
 
   /* need to have five level of importance 
   regular(1), slightly(2), important(3), fairly(4), largely(5)
+  will settle with 3 hehehe
   */
 
-  function checkImp() {
-    const splitText = input.split(" ");
-    if (splitText.includes("!important")) {
-      return 3;
-    } else if (splitText.includes("!slightly")) {
-      return 2;
-    } else if (splitText.includes("!fairly")) {
-      return 4;
-    } else if (splitText.includes("!largely")) {
-      return 5;
-    } else if (splitText.includes("!regular")) {
-      return 1;
-    }
-  }
+  // function checkImp() {
+  //   const splitText = input.split(" ");
+  //   if (splitText.includes("!important")) {
+  //     return 3;
+  //   } else if (splitText.includes("!slightly")) {
+  //     return 2;
+  //   } else if (splitText.includes("!fairly")) {
+  //     return 4;
+  //   } else if (splitText.includes("!largely")) {
+  //     return 5;
+  //   } else if (splitText.includes("!regular")) {
+  //     return 1;
+  //   }
+  // }
 
   function deleteWithId(id) {
     setItems((prev) => {
@@ -116,23 +99,7 @@ function App() {
         item.id === id
           ? {
               ...item,
-              content: typed
-                .split(" ")
-                .some((word) =>
-                  [
-                    "!important",
-                    "!regular",
-                    "!slightly",
-                    "!largely",
-                    "!fairly",
-                  ].includes(word)
-                )
-                ? typed.replace(
-                    /\s(!important|!regular|!slightly|!largely|!fairly)/g,
-                    ""
-                  )
-                : //g will consider all not just one /\s will take up any whitespace, | => logical OR in regular expression
-                  typed,
+              content: typed,
             }
           : item
       );
@@ -150,14 +117,14 @@ function App() {
   }
 
   return (
-    <>
-      <div className="container">
-        <div className="todoList">
+    <div className="bg-gray-950 flex justify-center py-8 px-25 min-h-screen">
+      <div className="container flex flex-col items-center">
+        <div className="todoList bg-gray-900 w-[50vw] p-6 flex flex-col rounded-lg gap-5">
           <Heading />
 
-          <div className="main">
+          <div className="main relative">
             <form>
-              <div className="input-div">
+              <div className="input-div w-full h-10 relative bg-gray-800 rounded-lg">
                 <Input
                   set={setInput}
                   ready={setReadyCIBtn}
@@ -165,24 +132,24 @@ function App() {
                   ph={"Enter your task here..."}
                 />
 
-                <ClearButton ready={readyCIBtn} clear={clearInput} />
+                {/* <ClearButton ready={readyCIBtn} clear={clearInput} /> */}
               </div>
 
-              {input.length === 0 ? (
-                <span className="emoji-on-add">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-keyboard"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M14 5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM2 4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
-                    <path d="M13 10.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm0-2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-5 0A.25.25 0 0 1 8.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 8 8.75zm2 0a.25.25 0 0 1 .25-.25h1.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-1.5a.25.25 0 0 1-.25-.25zm1 2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-5-2A.25.25 0 0 1 6.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 6 8.75zm-2 0A.25.25 0 0 1 4.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 4 8.75zm-2 0A.25.25 0 0 1 2.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 2 8.75zm11-2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-2 0a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-2 0A.25.25 0 0 1 9.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 9 6.75zm-2 0A.25.25 0 0 1 7.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 7 6.75zm-2 0A.25.25 0 0 1 5.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 5 6.75zm-3 0A.25.25 0 0 1 2.25 6h1.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-1.5A.25.25 0 0 1 2 6.75zm0 4a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm2 0a.25.25 0 0 1 .25-.25h5.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-5.5a.25.25 0 0 1-.25-.25z" />
-                  </svg>
-                </span>
-              ) : (
+              {input.length !== 0 && 
+                // <span className="emoji-on-add">
+                //   <svg
+                //     xmlns="http://www.w3.org/2000/svg"
+                //     width="16"
+                //     height="16"
+                //     fill="currentColor"
+                //     className="bi bi-keyboard"
+                //     viewBox="0 0 16 16"
+                //   >
+                //     <path d="M14 5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM2 4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
+                //     <path d="M13 10.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm0-2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-5 0A.25.25 0 0 1 8.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 8 8.75zm2 0a.25.25 0 0 1 .25-.25h1.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-1.5a.25.25 0 0 1-.25-.25zm1 2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-5-2A.25.25 0 0 1 6.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 6 8.75zm-2 0A.25.25 0 0 1 4.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 4 8.75zm-2 0A.25.25 0 0 1 2.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 2 8.75zm11-2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-2 0a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-2 0A.25.25 0 0 1 9.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 9 6.75zm-2 0A.25.25 0 0 1 7.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 7 6.75zm-2 0A.25.25 0 0 1 5.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 5 6.75zm-3 0A.25.25 0 0 1 2.25 6h1.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-1.5A.25.25 0 0 1 2 6.75zm0 4a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm2 0a.25.25 0 0 1 .25-.25h5.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-5.5a.25.25 0 0 1-.25-.25z" />
+                //   </svg>
+                // </span>
+               (
                 <AddButton add={onAdd} />
               )}
             </form>
@@ -198,7 +165,6 @@ function App() {
           setSpin={(boolean) => setLoading(boolean)}
         />
 
-        <Footer />
         {editClicked ? (
           <div className="edit-form">
             <textarea
@@ -232,7 +198,7 @@ function App() {
         ) : null}
       </div>
       {loading ? <LoadingSpinner /> : null}
-    </>
+    </div>
   );
 }
 
