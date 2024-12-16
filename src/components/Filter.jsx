@@ -17,14 +17,19 @@ export default function Filter(props) {
   }
 
   return (
-    <div className=" bg-transparent text-white rounded-lg absolute top-8 right-8 flex flex-col gap-2 w-32">
-      <button onClick={() => setClicked(!clicked)} className="flex justify-between gap-2 align-middle items-center p-1 px-2 bg-gray-700 rounded-lg">
+    <div className=" bg-transparent text-white rounded-lg absolute top-4 right-4 sm:top-6 sm:right-6 flex flex-col gap-2 w-32">
+      <button
+        onClick={() => setClicked(!clicked)}
+        className=" flex justify-between gap-2 align-middle items-center p-1 px-2 bg-gray-800 border border-gray-700 rounded-md"
+      >
         {optionValue}
         <IoMdArrowDropdown className="text-white" />
       </button>
 
       <div
-        className={`${clicked ? "block" : "hidden"} bg-gray-700 rounded-lg py-2`}
+        className={`${
+          clicked ? "block" : "hidden"
+        } bg-gray-800 border border-gray-700 rounded-md py-2 z-10`}
         onClick={handleOptionChange}
         id="dropdown"
         name="options"
@@ -32,27 +37,31 @@ export default function Filter(props) {
         <option
           className="hover:bg-gray-900 text-md px-2 cursor-pointer"
           value="all"
+          onClick={() => setClicked(!clicked)}
         >
           All
         </option>
         <option
           className="hover:bg-gray-900 text-md px-2 cursor-pointer"
           value="pending"
+          onClick={() => setClicked(!clicked)}
         >
           Pending
         </option>
         <option
           className="hover:bg-gray-900 text-md px-2 cursor-pointer"
           value="completed"
+          onClick={() => setClicked(!clicked)}
         >
           Completed
         </option>
-        <option
+        {/* <option
           className="hover:bg-gray-900 text-md px-2 cursor-pointer"
           value="importance"
+          onClick={() => setClicked(!clicked)}
         >
           Importance
-        </option>
+        </option> */}
       </div>
     </div>
   );

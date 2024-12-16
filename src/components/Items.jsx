@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Item from "./IndividualItem";
 import Filter from "./Filter";
+import boximage from "../assets/box.webp";
 
 function Items(props) {
   const items = props.arr;
@@ -51,11 +52,14 @@ function Items(props) {
   }
 
   return (
-    <div className="items p-12 pt-16 relative w-[50vw] rounded-lg text-white my-8 bg-gray-900">
+    <div className="items p-6 py-20 sm:py-16 relative w-full sm:w-[50vw] h-full overflow-y-hidden rounded-lg text-white my-8 bg-gray-900">
       <Filter array={items} getOption={handleOption} />
 
       {optionBasedItems.length === 0 ? (
-        <span className="cry-txt-emj w-full flex flex-col items-center text-5xl text-white">(┬┬﹏┬┬)</span>
+        <span className="cry-txt-emj w-full h-full flex flex-col gap-4 justify-center items-center text-white">
+          <img className="w-1/2" src={boximage} alt="empty box image" />
+          <p className="text-2xl">No Items Found</p>
+        </span>
       ) : (
         <ul className="flex flex-col">
           {optionBasedItems.map((item) => {

@@ -1,21 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { LiaPlusSolid } from "react-icons/lia";
 
 function AddButton(props) {
+
   return (
-    <button title="Add item"  onClick={props.add} className="absolute top-0 right-0 h-full w-fit bg-gray-500 rounded-md p-3 text-white ">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        className="bi bi-plus-lg"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fillRule="evenodd"
-          d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
-        />
-      </svg>
+    <button
+      tabIndex={props.content.trim(" ").length > 0 ? 0 : -1}
+      title="Add item"
+      onClick={props.add}
+      className={`${
+        props.content.trim(" ").length > 0 ? "opacity-100" : "opacity-50 pointer-events-none"
+      } transition-all duration-300 absolute top-0 right-0 h-full outline-blue-500 w-fit bg-gray-500 rounded-md p-3 text-white`}
+    >
+      <LiaPlusSolid />
     </button>
   );
 }
